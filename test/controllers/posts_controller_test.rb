@@ -10,6 +10,11 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should display posts in descending order" do
+    get posts_url, as: :json
+    assert_equal Post.order(created_at: :desc).to_json, @response.body
+  end
+
   test "should create post" do
     assert_difference("Post.count") do
       post posts_url, params: { post: { body: @post.body, title: @post.title } }, as: :json

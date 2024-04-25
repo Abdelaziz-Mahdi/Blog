@@ -1,7 +1,7 @@
 import { BrowserRouter as Router } from 'react-router-dom'
 import NavBar from './components/NavBar'
 import './App.css'
-import PostsList from './features/posts/PostsList'
+import AppRoutes from './components/AppRoutes'
 
 function App() {
 
@@ -11,7 +11,7 @@ function App() {
       <div className='start'>
         <h1>React on Rails</h1>
         <p>find this app</p>
-        <PostsList />
+        <AppRoutes />
       </div>
     </Router>
   )

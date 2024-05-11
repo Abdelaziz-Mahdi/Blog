@@ -7,10 +7,9 @@ function App() {
 
   return (
     <Router>
-      <NavBar />
       <div className='start'>
-        <h1>React on Rails</h1>
-        <p>find this app</p>
+        <h1>React on Rails Blog</h1>
+        <NavBar />
         <AppRoutes />
       </div>
     </Router>

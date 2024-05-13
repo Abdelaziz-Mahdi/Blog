@@ -7,3 +7,13 @@ export const getPosts = async () => {
   }
   return response.json();
 }
+
+export const deletePost = async (id) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'DELETE',
+  });
+  if (!response.ok) {
+    throw new Error('Failed to delete post');
+  }
+  return response.json();
+}

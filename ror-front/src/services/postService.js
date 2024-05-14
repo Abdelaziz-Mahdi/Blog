@@ -8,6 +8,14 @@ export const getPosts = async () => {
   return response.json();
 }
 
+export const getPost = async (id) => {
+  const response = await fetch(`${API_URL}/posts/${id}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch post');
+  }
+  return response.json();
+}
+
 export const deletePost = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',

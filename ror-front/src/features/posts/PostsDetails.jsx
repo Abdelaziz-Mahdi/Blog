@@ -1,27 +1,37 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { API_URL } from '../../constants'
+import { getPost, deletePost as deletePostApi } from "../../services/postService";
 
 export default function PostsDetails() {
     const [post, setPost] = useState({})
     const navigate = useNavigate()
     const { id } = useParams()
+    const [error, setError] = useState(null)
     
     useEffect(() => {
-        fetch(`${API_URL}/${id}`)
-        .then((response) => response.json())
-        .then((data) => setPost(data))
+        async function loadPost() {
+            try {
+                const json = await getPost(id);
+                setPost(json);
+            } catch (e) {
+                setError("An error occurred. Awkward...");
+            }
+        }
+        loadPost();
     }, [id])
     
-    const handleDelete = () => {
-        fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-        })
-        .then(() => navigate('/'))
+    const handleDelete = async () => {
+        try {
+            await deletePostApi(post.id);
+            navigate("/")
+        } catch (e) {
+            setError("An error occurred:", e);
+        }
     }
 
     return (
         <div>
+            <div>{error}</div>
             {!post.title ? (
                 <div>Loading...</div>
             ) : (

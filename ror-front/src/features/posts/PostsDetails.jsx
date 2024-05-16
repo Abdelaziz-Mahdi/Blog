@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { getPosts, deletePost as deletePostApi } from "../../services/postService";
+import { getPost, deletePost as deletePostApi } from "../../services/postService";
 
 export default function PostsDetails() {
     const [post, setPost] = useState({})
@@ -11,7 +11,7 @@ export default function PostsDetails() {
     useEffect(() => {
         async function loadPost() {
             try {
-                const json = await getPosts(id);
+                const json = await getPost(id);
                 setPost(json);
             } catch (e) {
                 setError("An error occurred. Awkward...");
@@ -20,14 +20,12 @@ export default function PostsDetails() {
         loadPost();
     }, [id])
     
-    const handleDelete = () => {
-        async (id) => {
-            try {
-                await deletePostApi(id);
-                navigate("/")
-            } catch (e) {
-                setError("An error occurred:", e);
-            }
+    const handleDelete = async () => {
+        try {
+            await deletePostApi(post.id);
+            navigate("/")
+        } catch (e) {
+            setError("An error occurred:", e);
         }
     }
 

@@ -1,7 +1,7 @@
 import { API_URL } from '../constants';
 
 export const getPosts = async () => {
-  const response = await fetch(`${API_URL}/posts`);
+  const response = await fetch(`${API_URL}`);
   if (!response.ok) {
     throw new Error('Failed to fetch posts');
   }
@@ -9,7 +9,7 @@ export const getPosts = async () => {
 }
 
 export const getPost = async (id) => {
-  const response = await fetch(`${API_URL}/posts/${id}`);
+  const response = await fetch(`${API_URL}/${id}`);
   if (!response.ok) {
     throw new Error('Failed to fetch post');
   }
@@ -23,5 +23,5 @@ export const deletePost = async (id) => {
   if (!response.ok) {
     throw new Error('Failed to delete post');
   }
-  return response.json();
+  return null;
 }

@@ -8,22 +8,6 @@ export const getPosts = async () => {
   return response.json();
 }
 
-try {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(post),
-  });
-
-  if (response.ok) {
-    const { id } = await response.json();
-    navigate(`/posts/${id}`);
-  }
-} catch (error) {
-  console.error(error);
-}
-};
-
 export const createPost = async (post) => {
   const response = await fetch(API_URL, {
     method: 'POST',
